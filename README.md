@@ -1,137 +1,150 @@
-# Twitter Sentiment Analysis with Enhanced BERT
+# Twitter Sentiment Analysis
 
-A complete end-to-end sentiment analysis system using Enhanced BERT model with FastAPI backend and React frontend. This project classifies tweets into 4 categories: Positive, Negative, Neutral, and Irrelevant.
+A project from HCMUT's ML IoT Lab comparing multiple deep learning architectures for sentiment analysis on noisy Twitter data. This system classifies tweets into 4 categories: Positive, Negative, Neutral, and Irrelevant.
+
+This project was developed by the team "5 anh em siêu nhân" and advised by Trần Minh Huy.
 
 ## 🚀 Features
 
-- **Enhanced BERT Model**: Custom BERT architecture with multi-head attention and deeper classification layers
-- **ELMo+BERT Model**: Combined architecture using ELMo embeddings and BERT for enhanced performance
-- **4-Class Classification**: Positive, Negative, Neutral, Irrelevant sentiment detection
-- **Google Drive Integration**: Automatic model download from cloud storage
-- **FastAPI Backend**: High-performance REST API with CORS support
-- **React Frontend**: Modern, responsive user interface with real-time predictions
-- **Docker Support**: Fully containerized deployment
-- **Intelligent Preprocessing**: Advanced text preprocessing for social media content
-- **Real-time Predictions**: Fast sentiment analysis with confidence scores
-- **Multiple Model Architectures**: Support for both Enhanced BERT and ELMo+BERT models
+* **Multi-Model Comparison**: Experiments with four distinct architectures: BERT only, ELMo + BERT, Five-Embedding, and ELMo + Transformer (DialoGPT-based).
+* **4-Class Classification**: Detects Positive, Negative, Neutral, and Irrelevant sentiments.
+* **Intelligent Preprocessing**: A robust pipeline designed to handle noisy social media text.
+* **FastAPI Backend**: High-performance REST API with CORS support.
+* **React Frontend**: Modern, responsive user interface with real-time predictions.
+* **Google Drive Integration**: Automatic model download from cloud storage.
+* **Docker Support**: Fully containerized deployment.
+* **Real-time Predictions**: Fast sentiment analysis with confidence scores.
 
 ## 📁 Project Structure
 
-```
+```bash
 twitter_sentiment_bert_only/
 ├── backend/
 │   ├── models/
 │   │   ├── __init__.py
-│   │   ├── enhanced_bert.py          # Enhanced BERT model architecture
-│   │   ├── elmo_bert.py              # ELMo+BERT combined model architecture
-│   │   └── elmo_bert.ipynb           # Jupyter notebook with model development
+│   │   ├── enhanced_bert.py         # Model 1: BERT only (with multi-head attention)
+│   │   ├── elmo_bert.py             # Model 2: ELMo+BERT combined model architecture 
+│   │   └── elmo_bert.ipynb          # Jupyter notebook with model development
 │   ├── utils/
 │   │   ├── __init__.py
-│   │   ├── drive_loader.py           # Google Drive API integration
-│   │   ├── model_loader.py           # Model loading and initialization
-│   │   ├── prediction.py             # Prediction pipeline
-│   │   └── preprocessing.py          # Text preprocessing utilities
-│   ├── server.py                     # FastAPI application
-│   ├── requirements.txt              # Python dependencies
-│   ├── Dockerfile                    # Docker configuration
-│   ├── .env.example                  # Environment variables template
-│   └── .gitignore                    # Git ignore rules
+│   │   ├── drive_loader.py          # Google Drive API integration
+│   │   ├── model_loader.py          # Model loading and initialization
+│   │   ├── prediction.py            # Prediction pipeline
+│   │   └── preprocessing.py         # Text preprocessing utilities
+│   ├── server.py                    # FastAPI application
+│   ├── requirements.txt             # Python dependencies
+│   ├── Dockerfile                   # Docker configuration
+│   ├── .env.example                 # Environment variables template
+│   └── .gitignore                   # Git ignore rules
 ├── frontend/
 │   ├── src/
-│   │   ├── App.tsx                   # Main React sentiment analyzer UI
-│   │   ├── components/ui/            # Reusable UI components
+│   │   ├── App.tsx                  # Main React sentiment analyzer UI
+│   │   ├── components/ui/           # Reusable UI components
 │   │   └── ...
-│   ├── package.json                  # Node.js dependencies
-│   ├── tailwind.config.ts            # Tailwind CSS configuration
+│   ├── package.json                 # Node.js dependencies
+│   ├── tailwind.config.ts           # Tailwind CSS configuration
 │   └── ...
 └── README.md
-```
+````
 
 ## 🛠️ Setup Instructions
 
 ### Prerequisites
 
-- Python 3.12+
-- Node.js 18+
-- Docker (optional)
-- Google Drive API credentials
+  * Python 3.12+
+  * Node.js 18+
+  * Docker (optional)
+  * Google Drive API credentials
 
 ### Backend Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/VoMinhKhoii/hcmut-project-cuoi-khoa.git
-   cd hcmut-project-cuoi-khoa/backend
-   ```
+1.  **Clone the repository**
 
-2. **Create virtual environment**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
+    ```bash
+    git clone [https://github.com/VoMinhKhoii/hcmut-project-cuoi-khoa.git](https://github.com/VoMinhKhoii/hcmut-project-cuoi-khoa.git)
+    cd hcmut-project-cuoi-khoa/backend
+    ```
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+2.  **Create virtual environment**
 
-4. **Setup Google Drive API**
-   - Get Google Drive API credentials from Google Cloud Console
-   - Create a `.env` file in the backend directory:
-   ```env
-   GOOGLE_DRIVE_FOLDER_ID=your_folder_id_here
-   REFRESH_TOKEN=your_refresh_token_here
-   CLIENT_ID=your_client_id_here
-   CLIENT_SECRET=your_client_secret_here
-   ```
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+    ```
 
-5. **Run the server**
-   ```bash
-   python server.py
-   # Or with uvicorn
-   uvicorn server:app --host 0.0.0.0 --port 8888
-   ```
+3.  **Install dependencies**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Setup Google Drive API**
+    Get Google Drive API credentials from Google Cloud Console.
+    Create a `.env` file in the `backend` directory:
+
+    ```ini
+    GOOGLE_DRIVE_FOLDER_ID=your_folder_id_here
+    REFRESH_TOKEN=your_refresh_token_here
+    CLIENT_ID=your_client_id_here
+    CLIENT_SECRET=your_client_secret_here
+    ```
+
+5.  **Run the server**
+
+    ```bash
+    python server.py
+    # Or with uvicorn
+    uvicorn server:app --host 0.0.0.0 --port 8888
+    ```
 
 ### Frontend Setup
 
-1. **Navigate to frontend directory**
-   ```bash
-   cd ../frontend
-   ```
+1.  **Navigate to frontend directory**
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+    ```bash
+    cd ../frontend
+    ```
 
-3. **Start development server**
-   ```bash
-   npm run dev
-   ```
+2.  **Install dependencies**
 
-4. **Access the application**
-   - Frontend: http://localhost:8080
-   - Backend API: http://localhost:8888
-   - API Documentation: http://localhost:8888/docs
+    ```bash
+    npm install
+    ```
+
+3.  **Start development server**
+
+    ```bash
+    npm run dev
+    ```
+
+4.  **Access the application**
+
+      * **Frontend**: `http://localhost:8080`
+      * **Backend API**: `http://localhost:8888`
+      * **API Documentation**: `http://localhost:8888/docs`
 
 ### Docker Setup (Recommended for Production)
 
-1. **Build and run with Docker**
-   ```bash
-   cd backend
-   docker build -t sentiment-api .
-   docker run -p 8888:8888 sentiment-api
-   ```
+1.  **Build and run with Docker**
 
-2. **Run frontend separately**
-   ```bash
-   cd frontend
-   npm run dev
-   ```
+    ```bash
+    cd backend
+    docker build -t sentiment-api .
+    docker run -p 8888:8888 sentiment-api
+    ```
+
+2.  **Run frontend separately**
+
+    ```bash
+    cd frontend
+    npm run dev
+    ```
 
 ## 🔧 API Usage
 
-### Predict Sentiment (Enhanced BERT)
+> **Note:** The API provides endpoints for the "BERT only" and "ELMo + BERT" models, which were part of the broader comparison.
+
+### Predict Sentiment (BERT only)
 
 **POST** `/predict`
 
@@ -142,6 +155,7 @@ twitter_sentiment_bert_only/
 ```
 
 **Response:**
+
 ```json
 {
   "text": "I love this product! It works amazing!",
@@ -161,7 +175,7 @@ twitter_sentiment_bert_only/
 
 **POST** `/predict-elmo-bert`
 
-Uses the combined ELMo+BERT architecture for potentially enhanced performance:
+Uses the combined ELMo+BERT architecture, which was the best-performing model in the experiment.
 
 ```json
 {
@@ -177,61 +191,57 @@ Uses the combined ELMo+BERT architecture for potentially enhanced performance:
 
 Returns API status and model information.
 
-## 🧠 Model Architecture
+## 🧠 Model Architectures & Comparison
 
-### Enhanced BERT Model
+The core of this project was to find the best model for handling unstructured and noisy Twitter data, which includes slang, typos, emojis, and hashtags. We experimented with four architectures:
 
-The Enhanced BERT model includes:
-
-- **Base BERT**: `bert-base-uncased` as the foundation
-- **Multi-head Attention**: 8-head self-attention mechanism
-- **Deep Classification**: 3-layer fully connected network with residual connections
-- **Layer Normalization**: Batch normalization for stable training
-- **Dropout**: Regularization to prevent overfitting
-
-### ELMo+BERT Combined Model
-
-The ELMo+BERT model (DICET architecture) combines:
-
-- **ELMo Embeddings**: Contextualized word representations from TensorFlow Hub
-- **BERT Representations**: Pre-trained BERT embeddings
-- **Feature Fusion**: Concatenation of ELMo (1024-dim) and BERT (768-dim) features
-- **BiLSTM Encoder**: Bidirectional LSTM for sequence modeling (256 hidden units)
-- **Additive Attention**: Attention mechanism for feature weighting
-- **Classification Head**: Fully connected layers with dropout and ReLU activation
-- **Gaussian Noise**: Regularization during training (σ=0.3)
+  * **BERT only**: A standard BERT (Bidirectional Encoder Representations from Transformers) model with a custom classification head, including Multi-Head Self-Attention and Residual Connections.
+  * **ELMo + BERT**: A combined architecture that concatenates contextual embeddings from both ELMo and BERT. This combined embedding is then passed through a BiLSTM with Attention layer for final classification.
+  * **ELMo + Transformer (DialoGPT-based)**: This model replaces the BERT embedding with one from DialoGPT (a conversational AI from GPT-2). The embedding is then passed to a BiLSTM with Attention layer.
+  * **Five-Embedding**: The most complex model, which concatenates five different types of embeddings: GloVe, Part-of-Speech (POS), Lexicon, ELMo, and BERT. This rich, 2198-dimension embedding is also processed by a BiLSTM with Attention layer.
 
 ## 📊 Performance
 
-- **Accuracy**: ~85-90% on validation set
-- **Classes**: 4-class classification (Positive, Negative, Neutral, Irrelevant)
-- **Inference Speed**: <100ms per prediction
-- **Model Size**: ~110MB (BERT base)
+The models were trained and evaluated, focusing on validation accuracy and loss. The dataset was noted to have an uneven distribution of sentiments (imbalanced data).
+
+  * **Best Performance**: The **ELMo + BERT** model achieved the highest validation accuracy (approx. 98%) and the lowest validation loss (approx. 0.07).
+  * **Runner-up**: The **Five-Embedding** model also performed very well, with the second-highest validation accuracy (approx. 96%).
+  * **Conclusion**: Combining different powerful embeddings (like ELMo and BERT) proved more effective than using a single model (BERT only) or a more complex combination (Five-Embedding) for this specific task.
+
+| Model | Embedding Dimension | Validation Accuracy (Approx.) | Validation Loss (Approx.) |
+| :--- | :--- | :--- | :--- |
+| **ELMo + BERT** | 1792 dims | \~98% | \~0.07 |
+| **Five-Embedding** | 2198 dims | \~96% | \~0.12 |
+| **ELMo + Transformer** | 1024 dims | \~95% | \~0.125 |
+| **BERT only** | 768 dims | \~92% | \~0.28 |
 
 ## 🔄 Text Preprocessing Pipeline
 
-1. URL replacement with tokens
-2. Mention handling (@user → @USER)
-3. Hashtag extraction and processing
-4. Emoji conversion to descriptive text
-5. Punctuation normalization
-6. Contraction expansion
-7. Case normalization with emphasis detection
+To handle the noise of Twitter data, a multi-step intelligent preprocessing pipeline was used:
+
+  * Spell Correction
+  * Hashtag Processing
+  * Sentiment Aware Tokenization
+  * URL Handling (replaces URLs)
+  * Mention Handling (processes @user)
+  * Special Character Deletion
+
+(Also includes emoji conversion, punctuation normalization, contraction expansion, and case normalization)
 
 ## 🌐 Frontend Features
 
-- **Real-time Analysis**: Instant sentiment prediction
-- **Interactive UI**: Clean, modern interface built with React and Tailwind CSS
-- **Confidence Visualization**: Progress bars showing prediction confidence
-- **Example Texts**: Pre-loaded examples for quick testing
-- **Error Handling**: Graceful error messages and loading states
-- **Responsive Design**: Works on desktop and mobile devices
+  * **Real-time Analysis**: Instant sentiment prediction.
+  * **Interactive UI**: Clean, modern interface built with React and Tailwind CSS.
+  * **Confidence Visualization**: Progress bars showing prediction confidence.
+  * **Example Texts**: Pre-loaded examples for quick testing.
+  * **Error Handling**: Graceful error messages and loading states.
+  * **Responsive Design**: Works on desktop and mobile devices.
 
 ## 📝 Environment Variables
 
-Create a `.env` file in the backend directory:
+Create a `.env` file in the `backend` directory:
 
-```env
+```ini
 # Google Drive Configuration
 GOOGLE_DRIVE_FOLDER_ID=your_folder_id_containing_model
 REFRESH_TOKEN=your_google_refresh_token
@@ -254,40 +264,47 @@ docker run -p 8888:8888 --env-file ./backend/.env sentiment-api
 ### Cloud Deployment
 
 The application is ready for deployment on:
-- Google Cloud Run
-- AWS ECS
-- Azure Container Instances
-- Heroku
+
+  * Google Cloud Run
+  * AWS ECS
+  * Azure Container Instances
+  * Heroku
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1.  Fork the repository
+2.  Create a feature branch (`git checkout -b feature/amazing-feature`)
+3.  Commit your changes (`git commit -m 'Add some amazing feature'`)
+4.  Push to the branch (`git push origin feature/amazing-feature`)
+5.  Open a Pull Request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the `LICENSE` file for details.
 
-## 👥 Authors
+## 👥 Team Members ("5 anh em siêu nhân")
 
-- **Vo Minh Khoi** - Initial work - [VoMinhKhoii](https://github.com/VoMinhKhoii)
+  * Vũ Trí Khải
+  * Võ Minh Khôi - [VoMinhKhoii](https://github.com/VoMinhKhoii)
+  * Nguyễn Tiến Nam - [tiennam-nguyen](https://github.com/tiennam-nguyen)
+  * Hoàng Minh Hải
+  * Đoàn Trần Quốc Việt
+
+### Advisor / Mentor
+
+  * Trần Minh Huy
 
 ## 🙏 Acknowledgments
 
-- HCMUT for the project opportunity
-- Hugging Face for the BERT model
-- FastAPI and React communities for excellent frameworks
-- Google Drive API for model storage solution
+  * HCMUT EE MACHINE LEARNING & IOT LAB (BK-tel ML IoT)
+  * FastAPI and React communities for excellent frameworks
+  * Google Drive API for model storage solution
 
 ## 📧 Contact
 
 For questions or support, please contact:
-- Email: your.email@example.com
-- GitHub: [@VoMinhKhoii](https://github.com/VoMinhKhoii)
+GitHub: [@VoMinhKhoii](https://github.com/VoMinhKhoii)
 
----
+-----
 
-**Built with ❤️ at Ho Chi Minh City University of Technology**
+</p><p align="center">Ho Chi Minh City – 2025</p>
